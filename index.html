@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Server Sent Events demo</title>
+    <meta name="description" content="Server Sent Events demo" />
+    <meta name="author" content="Kaitlin Moreno" />
+  <style type="text/css">
+  .event {
+    margin: 24px 0;
+  }
+  p {
+    margin: 0;
+  }
+  </style>
+  </head>
+
+  <body>
+    <script>
+      event()
+      function event() {
+        var client = new EventSource("http://localhost:3000")
+        client.onmessage = function (msg) {
+          const type = document.createTextNode(`c1: ${msg.data}`);
+          const typeNode = document.createElement("p")
+          typeNode.append(type);
+          document.getElementById('events').appendChild(typeNode);
+        }
+
+        var client2 = new EventSource("http://localhost:3000")
+        client2.onmessage = function (msg) {
+          const type = document.createTextNode(`c2: ${msg.data}`);
+          const typeNode = document.createElement("p")
+          typeNode.append(type);
+          document.getElementById('events').appendChild(typeNode);
+        }
+      }
+    </script>
+  </body>
+  <div>
+    <h1>Server Sent Events demo</h1>
+      <div id="events"></div>
+  </div>
+</html>
